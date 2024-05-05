@@ -24,27 +24,52 @@ function getHumanChoice() {
 }
 
 function playRound(humanChoice, computerChoice) {
+  console.log(`Your choice: ${capitalizeFirstLetter(humanChoice)}`)
+  console.log(`Computer's choice: ${capitalizeFirstLetter(computerChoice)}`)
+
   // Compare choices and determine winner
   if (humanChoice === computerChoice) {
     console.log("It's a tie!")
+    return 0;
   } else if (
     (humanChoice === "rock" && computerChoice === "scissors") ||
     (humanChoice === "paper" && computerChoice === "rock") ||
     (humanChoice === "scissors" && computerChoice === "paper")
   ) {
     // Player wins
-    humanScore++;
     console.log(`You win! ${capitalizeFirstLetter(humanChoice)} beats ${capitalizeFirstLetter(computerChoice)}`);
+    return 1;
   } else {
     // Computer wins
-    computerScore++;
     console.log(`You lose! ${capitalizeFirstLetter(computerChoice)} beats ${capitalizeFirstLetter(humanChoice)}`);
+    return 2;
   }
 }
 
-const humanSelection = getHumanChoice().toLowerCase();
-const computerSelection = getComputerChoice().toLowerCase();
 
 function capitalizeFirstLetter(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
+
+
+function playGame() {
+  let humanScore = 0;
+  let computerScore = 0;
+
+  for (let i = 0; i < 5; i++) {
+    const humanSelection = getHumanChoice().toLowerCase();
+    const computerSelection = getComputerChoice().toLowerCase();
+    let scoreCount = playRound(humanSelection, computerSelection);
+    
+    if (scoreCount === 1) {
+      humanScore += 1;
+    } else if (scoreCount === 2) {
+      computerScore += 1;
+    }
+
+  }
+
+  console.log(`Final Score: You - ${humanScore}, Computer - ${computerScore}`);
+}
+
+playGame();
