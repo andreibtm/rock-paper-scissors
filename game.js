@@ -52,24 +52,37 @@ function capitalizeFirstLetter(str) {
 }
 
 
-function playGame() {
+function playGame(humanChoice) {
   let humanScore = 0;
   let computerScore = 0;
 
-  for (let i = 0; i < 5; i++) {
-    const humanSelection = getHumanChoice().toLowerCase();
-    const computerSelection = getComputerChoice().toLowerCase();
-    let scoreCount = playRound(humanSelection, computerSelection);
-    
-    if (scoreCount === 1) {
-      humanScore += 1;
-    } else if (scoreCount === 2) {
-      computerScore += 1;
-    }
-
+  const humanSelection = humanChoice;
+  const computerSelection = getComputerChoice().toLowerCase();
+  let scoreCount = playRound(humanSelection, computerSelection);
+  
+  if (scoreCount === 1) {
+    humanScore += 1;
+  } else if (scoreCount === 2) {
+    computerScore += 1;
   }
 
   console.log(`Final Score: You - ${humanScore}, Computer - ${computerScore}`);
 }
 
-playGame();
+const options = document.querySelector("#options");
+
+options.addEventListener('click', (event) => {
+  let target = event.target;
+
+  switch (target.id) {
+    case 'rock':
+      playGame(target.id);
+      break;
+      case 'paper':
+      playGame(target.id);
+      break;
+      case 'scissors':
+      playGame(target.id);
+      break;
+  }
+});
