@@ -4,22 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="game.js" defer></script>
-    <meta rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css">
     <title>RPS</title>
 </head>
 <body>
+    <h1>Rock-Paper-Scissors!</h1>
+
     <div id="options">
-        <button id="rock">Rock</button>
-        <button id="paper">Paper</button>
-        <button id="scissors">Scissors</button>
+        <button id="rock" class="button-5">Rock</button>
+        <button id="paper" class="button-5">Paper</button>
+        <button id="scissors" class="button-5">Scissors</button>
     </div>
     <div id="showResults">
-        <div id="humanChoice"></div>
-        <div id="computerChoice"></div>
-        <div id="winner"></div>
-        <div id="score"></div>
+        <div class="container">
+            <div id="humanChoice" class="choice0">Your choice:</div>
+            <div id="computerChoice" class="choice">Computer's choice:</div>
+        </div>
+        <div id="winner">Who wins?</div>
+        <div id="score">Score: You - 0, Computer - 0</div>
+        <div id="finalWinner"></div>
     </div>
-
-    <div id="finalWinner"></div>
 </body>
 </html>
