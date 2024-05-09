@@ -1,3 +1,18 @@
+/* Variables */
+
+let humanScore = 0;  
+let computerScore = 0;
+
+const options = document.querySelector("#options");
+const optHuman= document.querySelector('#humanChoice');
+const optComputer = document.querySelector('#computerChoice');
+const winner = document.querySelector('#winner');
+const score = document.querySelector('#score');
+const finalWinner = document.querySelector('#finalWinner');
+
+/* ----------*/
+
+
 function getComputerChoice() {
   const randomNumber = Math.random();
 
@@ -12,24 +27,13 @@ function getComputerChoice() {
     return choice;
 }
 
-function getHumanChoice() {
-  let humanChoice = prompt("Chosse between rock, paper or scissors!")
-  const choiceList = ["rock", "paper", "scissors"];
-
-  while(choiceList.indexOf(humanChoice) === -1 ){
-    humanChoice = prompt("Type a valid choice! Chosse between rock, paper or scissors!")
-  }
-
-  return humanChoice;
-}
-
 function playRound(humanChoice, computerChoice) {
-  console.log(`Your choice: ${capitalizeFirstLetter(humanChoice)}`)
-  console.log(`Computer's choice: ${capitalizeFirstLetter(computerChoice)}`)
+  optHuman.textContent = `Your choice: ${capitalizeFirstLetter(humanChoice)}`;
+  optComputer.textContent = `Computer's choice: ${capitalizeFirstLetter(computerChoice)}`;
 
   // Compare choices and determine winner
   if (humanChoice === computerChoice) {
-    console.log("It's a tie!")
+    winner.textContent = "It's a tie!";
     return 0;
   } else if (
     (humanChoice === "rock" && computerChoice === "scissors") ||
@@ -37,11 +41,11 @@ function playRound(humanChoice, computerChoice) {
     (humanChoice === "scissors" && computerChoice === "paper")
   ) {
     // Player wins
-    console.log(`You win! ${capitalizeFirstLetter(humanChoice)} beats ${capitalizeFirstLetter(computerChoice)}`);
+    winner.textContent = `You win! ${capitalizeFirstLetter(humanChoice)} beats ${capitalizeFirstLetter(computerChoice)}`;
     return 1;
   } else {
     // Computer wins
-    console.log(`You lose! ${capitalizeFirstLetter(computerChoice)} beats ${capitalizeFirstLetter(humanChoice)}`);
+    winner.textContent = `You lose! ${capitalizeFirstLetter(computerChoice)} beats ${capitalizeFirstLetter(humanChoice)}`;
     return 2;
   }
 }
@@ -53,8 +57,6 @@ function capitalizeFirstLetter(str) {
 
 
 function playGame(humanChoice) {
-  let humanScore = 0;
-  let computerScore = 0;
 
   const humanSelection = humanChoice;
   const computerSelection = getComputerChoice().toLowerCase();
@@ -66,10 +68,14 @@ function playGame(humanChoice) {
     computerScore += 1;
   }
 
-  console.log(`Final Score: You - ${humanScore}, Computer - ${computerScore}`);
-}
+  score.textContent = `Score: You - ${humanScore}, Computer - ${computerScore}`;
 
-const options = document.querySelector("#options");
+  if (humanScore == 5) {
+    finalWinner.textContent = `You won!`;
+  } else if (computerScore == 5) {
+    finalWinner.textContent = `Computer won!`;
+  }
+}
 
 options.addEventListener('click', (event) => {
   let target = event.target;
